@@ -6,7 +6,7 @@ namespace ConsoleAppChamado
 {
     class EquipamentoMetodo
     {
-        EquipamentoDados[] listaEquipamento = new EquipamentoDados[100];
+        public static EquipamentoDados[] listaEquipamento = new EquipamentoDados[100];
         int controlaIdEquipamento = 0;
         string dataInformada;
         internal EquipamentoDados[] ListaEquipamento { get => listaEquipamento; set => listaEquipamento = value; }
@@ -68,7 +68,7 @@ namespace ConsoleAppChamado
 
         }
 
-        public int EhListaVazia()
+        public bool EhListaVazia()
         {
             int numeroElementos = 0;
             for (int i = 0; i < ListaEquipamento.Length; i++)
@@ -78,7 +78,7 @@ namespace ConsoleAppChamado
                     numeroElementos++;
             }
 
-            return numeroElementos;
+            return numeroElementos==0;
         }
         private void SalvaAtualizacao(int idEquipamento, EquipamentoDados equipamento)
         {
@@ -135,7 +135,7 @@ namespace ConsoleAppChamado
 
         private static bool EhOpcaoDeAtualizacaoInvalida(string opcao)
         {
-            return opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5" && opcao != "S" && opcao != "V";
+            return opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5" && opcao != "S";
         }
 
         public void ApresentaMenssagem(string menssagem)
@@ -159,10 +159,10 @@ namespace ConsoleAppChamado
         }
         private static void ApresentaEquipamentoParaEditar(EquipamentoDados equipamento)
         {
-            Console.WriteLine($"Nome: {equipamento.NomeEquipamento}");
-            Console.WriteLine($"preço: {equipamento.PrecoAquisicao}");
-            Console.WriteLine($"número de série: {equipamento.SerieEquipamento}");
-            Console.WriteLine($"Data fabricação: {equipamento.DataFabricacao}");
+            Console.WriteLine($"Nome:               {equipamento.NomeEquipamento}");
+            Console.WriteLine($"preço:              {equipamento.PrecoAquisicao}");
+            Console.WriteLine($"número de série:    {equipamento.SerieEquipamento}");
+            Console.WriteLine($"Data fabricação:    {equipamento.DataFabricacao}");
             Console.WriteLine($"Nome do fabricante: {equipamento.NomeFabricante}");
         }
         public void ExcluirEquipamento(int idEquipamento)

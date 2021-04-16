@@ -36,7 +36,7 @@ namespace ConsoleAppChamado
             {
                 Console.Clear();
                 ApresentaMenuPrincipal();
-                opcaoMenu = Console.ReadLine();
+                opcaoMenu = Console.ReadLine().ToUpper();
                 if (EhOpcaoMenuPrincipalInvalida(opcaoMenu))
                 {
                     manipulaEquipamento.ApresentaMenssagem("Opção inválida Tente novamente");
@@ -61,7 +61,7 @@ namespace ConsoleAppChamado
                         }
                         if (opcao == "2")
                         {
-                            if (manipulaEquipamento.EhListaVazia() == 0)
+                            if (manipulaEquipamento.EhListaVazia())
                             {
                                 manipulaEquipamento.ApresentaMenssagem("Nenhum equipamento cadastrado");
                             }
@@ -76,7 +76,7 @@ namespace ConsoleAppChamado
                         }
                         if (opcao == "3")
                         {
-                            if (manipulaEquipamento.EhListaVazia() == 0)
+                            if (manipulaEquipamento.EhListaVazia())
                             {
                                 manipulaEquipamento.ApresentaMenssagem("Nenhum equipamento cadastrado");
                             }
@@ -88,7 +88,7 @@ namespace ConsoleAppChamado
                         }
                         if (opcao == "4")
                         {
-                            if (manipulaEquipamento.EhListaVazia() == 0)
+                            if (manipulaEquipamento.EhListaVazia())
                             {
                                 manipulaEquipamento.ApresentaMenssagem("Nenhum equipamento cadastrado");
                             }
@@ -127,18 +127,46 @@ namespace ConsoleAppChamado
                         if (opcao =="2")
                         {
                             manipulaChamado.ApresentaTodosChamados();
+                            continue;
                         }
                         if (opcao == "3")
                         {
-                            
+                            EditarChamado(manipulaChamado);
+                            continue;
+                        }
+                        if (opcao == "4")
+                        {
+                            ExcluirChamado(manipulaChamado);
+                            continue;
+                        }
+                        if (opcao == "S")
+                        {
+                            break;
                         }
 
                     }
                 }
+                if (opcao == "S")
+                    break;
                 Console.ReadLine();
 
 
             }
+        }
+
+        private static void EditarChamado(ChamadoMetodo manipulaChamado)
+        {
+            manipulaChamado.ApresentaTodosChamados();
+            Console.WriteLine("Digite o ID do Chamado para editar");
+            int idChamado = Convert.ToInt32(Console.ReadLine());
+            manipulaChamado.EditarChamado(idChamado);
+        }
+
+        private static void ExcluirChamado(ChamadoMetodo manipulaChamado)
+        {
+            Console.WriteLine("Digite o ID do Chamado para excluir");
+            int idChamado = Convert.ToInt32(Console.ReadLine());
+            manipulaChamado.ExcluirChamado(idChamado);
         }
 
         private static void AtualizaEquipamento(EquipamentoMetodo manipulaEquipamento)
@@ -154,7 +182,7 @@ namespace ConsoleAppChamado
         {
             Console.WriteLine("1 - Equipamentos");
             Console.WriteLine("2 - Chamados");
-            Console.WriteLine("3 - Sair");
+            Console.WriteLine("S - Sair");
         }
         private static void ExcluirEquipamento(EquipamentoMetodo manipulaEquipamento)
         {
